@@ -1,6 +1,10 @@
 {% block content %}
 <p><b>Where the Calculator Should go</b></p>
 
+<p><b>Your Score is:
+    <p id="score"</p>
+</b></p>
+
 <form action="/scorer/" method="post" name="calculator">
     {% csrf_token %}
 <div class="container">
@@ -26,14 +30,14 @@
             <input type="button" class="num_input btn btn-default btn-lg" id="9" name="9" value="9">
             <br />
             <br />
-            <input type="button" class="num_input btn btn-default btn-lg" id="d" name="d" value="x2">
-            <input type="button" class="num_input btn btn-default btn-lg" id="t" name="t" value="x3">
+            <input type="button" class="multiplier btn btn-default btn-lg" id="d" name="d" value="x2">
+            <input type="button" class="multiplier btn btn-default btn-lg" id="t" name="t" value="x3">
             <input type="button" id='next-throw' class="btn btn-default btn-lg" id=">" name="enter" value=">">
             <input type="button" class="num_input btn btn-default btn-lg" id="bull" name="bull" value="bullseye">
             <br />
             <br />
             <button class="num_input btn btn-warning btn-lg" type="reset">reset</button>
-            <input type="button" class="btn btn-default btn-lg" id="0" name="0" value="0">
+            <input type="button" class="num_input btn btn-default btn-lg" id="0" name="0" value="0">
             <button class="btn btn-success btn-lg" type="submit">submit</button>
             <br />
             <br />
