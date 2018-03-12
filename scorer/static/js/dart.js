@@ -1,13 +1,19 @@
 $(document).ready(function() {
+    //Set global variables
+    //Need to figure out how to set these variables as part of a StartGame method.
     var throwFocus = 1;
     var $throwFocus = $("#throw1");
     var playerScore = 301;
+    var numPlayers = 2;
+    var playerTurn = 1;
+    var endWithDoubles = 'False'
 
     console.log("hello");
 //    $("#throw1").val('0');
 //    $("#throw2").val('0');
 //    $("#throw3").val('0');
 
+    //Show Player Score
     document.getElementById('score').innerHTML = playerScore;
 
 // This waits fot a number to be clicked and adds it to the input
@@ -23,6 +29,7 @@ $(document).ready(function() {
 //        $(this).css("background-color", "blue");
     });
 
+    // Moves the focus of throw to next state & checks if valid
     function update_throw_state() {
       console.log("next throw");
       if (throwFocus === 1) {
