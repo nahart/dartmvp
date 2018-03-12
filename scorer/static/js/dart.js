@@ -46,8 +46,17 @@ $(document).ready(function() {
       }
       else {
           console.log('invalid');
+          $('.alert').show('fade')
       }
     }
+
+    $('.alert').alert()
+
+    $('.close').click(function() {
+        $('.alert').hide('fade');
+        //reset value
+        //$throwFocus.val(0);
+    })
 
     $("#next-throw").on('click', update_throw_state);
     $("#next-throw").on('click', function(){console.log('NEXT');});
