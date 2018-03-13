@@ -9,42 +9,46 @@
     {% csrf_token %}
 <div class="container">
     <div class="row">
-        <div class="col-xs-12">
-            <input id="throw1" type="text" name="throw1" value="">
+        <div class="col-xs-6">
+            <input id="throw1" type="text" class = "col-2 input-group-lg" name="throw1" value="">
             <!--<small class="error" aria-valuetext=""></small>-->
-            <input id="throw2" type="text" name="throw2" value="">
-            <input id="throw3" type="text" name="throw3" value="">
+            <input id="throw2" type="text" class = "col-2 input-group-lg" name="throw2" value="">
+            <input id="throw3" type="text" class = "col-2 input-group-lg" name="throw3" value="">
             <br />
-            <div class="alert alert-warning alert-dismissible fade show" role="alert" style="display: none">
+            <br />
+            <div class="alert col-6 alert-warning alert-dismissible fade show" role="alert" style="display: none">
                 <strong>Holy guacamole!</strong> That doesn't look like a valid throw.
                 <button type="button" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
+            <br />
             </div>
-            <input type="button" class="num_input btn btn-default btn-lg" id="1" name="1" value="1">
-            <input type="button" class="num_input btn btn-default btn-lg" id="2" name="2" value="2">
-            <input type="button" class="num_input btn btn-default btn-lg" id="3" name="3" value="3">
+            <input type="button" class="num_input col-2 btn btn-default btn-lg" id="1" name="1" value="1">
+            <input type="button" class="num_input col-2 btn btn-default btn-lg" id="2" name="2" value="2">
+            <input type="button" class="num_input col-2 btn btn-default btn-lg" id="3" name="3" value="3">
             <br />
             <br />
-            <input type="button" class="num_input btn btn-default btn-lg" id="4" name="4" value="4">
-            <input type="button" class="num_input btn btn-default btn-lg" id="5" name="5" value="5">
-            <input type="button" class="num_input btn btn-default btn-lg" id="6" name="6" value="6">
+            <input type="button" class="num_input col-2 btn btn-default btn-lg" id="4" name="4" value="4">
+            <input type="button" class="num_input col-2 btn btn-default btn-lg" id="5" name="5" value="5">
+            <input type="button" class="num_input col-2 btn btn-default btn-lg" id="6" name="6" value="6">
             <br />
             <br />
-            <input type="button" class="num_input btn btn-default btn-lg" id="7" name="7" value="7">
-            <input type="button" class="num_input btn btn-default btn-lg" id="8" name="8" value="8">
-            <input type="button" class="num_input btn btn-default btn-lg" id="9" name="9" value="9">
+            <input type="button" class="num_input col-2 btn btn-default btn-lg" id="7" name="7" value="7">
+            <input type="button" class="num_input col-2 btn btn-default btn-lg" id="8" name="8" value="8">
+            <input type="button" class="num_input col-2 btn btn-default btn-lg" id="9" name="9" value="9">
             <br />
             <br />
-            <input type="button" class="multiplier btn btn-default btn-lg" id="d" name="d" value="x2">
-            <input type="button" class="multiplier btn btn-default btn-lg" id="t" name="t" value="x3">
-            <input type="button" id='next-throw' class="btn btn-default btn-lg" id=">" name="enter" value=">">
-            <input type="button" class="num_input btn btn-default btn-lg" id="bull" name="bull" value="bullseye">
+            <input type="button" class="multiplier col-2 btn btn-default btn-lg" id="d" name="d" value="x2">
+            <input type="button" class="multiplier col-2 btn btn-default btn-lg" id="t" name="t" value="x3">
+            <input type="button" id='next-throw' class="btn col-2 btn-default btn-lg" id=">" name="enter" value=">">
             <br />
             <br />
-            <button class="num_input btn btn-warning btn-lg" type="reset">reset</button>
-            <input type="button" class="num_input btn btn-default btn-lg" id="0" name="0" value="0">
-            <button class="btn btn-success btn-lg" type="submit">submit</button>
+            <input type="button" class="num_input btn col-6 btn-default btn-lg" id="bull" name="bull" value="bullseye">
+            <br />
+            <br />
+            <button class="num_input btn col-2 btn-warning btn-lg" type="reset">reset</button>
+            <input type="button" class="num_input btn col-2 btn-default btn-lg" id="0" name="0" value="0">
+            <button class="btn col-2 btn-success btn-lg" type="submit">submit</button>
             <br />
             <br />
         </div>
