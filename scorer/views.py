@@ -23,3 +23,8 @@ class DartView(View):
 
     def post(self, request):
         print request.POST
+
+class SettingsView(View):
+
+    def get(self, request):
+        return render(request, 'scorer/start_game.html')
