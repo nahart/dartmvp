@@ -18,5 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls), #admin site is "it's own app"
+    url(r'^start_game/', include('scorer.urls')),
     url(r'^scorer/', include('scorer.urls')),
 ]
