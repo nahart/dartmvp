@@ -1,4 +1,27 @@
 {% block content %}
 <p>This will be the future settings panel.</p>
 
+<form action="{% url 'start_game' %}" method="post">
+    {% csrf_token %}
+    <p>
+        <label>Player 1</label>
+        <input type="text" name="player_1_first_name" placeholder="First Name" required value="Noah">
+        <input type="text" name="player_1_last_name" placeholder="Last Name" required value="Noah">
+    </p>
+
+    <p>
+        <label>Player 2</label>
+        <input type="text" name="player_2_first_name" placeholder="First Name" required value="Clark">
+        <input type="text" name="player_2_last_name" placeholder="Last Name" required value="Clark">
+    </p>
+
+    {% if game_301 %}
+        <p>
+            <input type="checkbox" name="end_with_double" value="checked"> Do you have to end the game with a double?
+        </p>
+    {% endif %}
+
+    <input type="submit" value="Let's Play">
+</form>
+
 {% endblock %}
