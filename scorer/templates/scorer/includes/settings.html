@@ -25,6 +25,14 @@
             <input type="checkbox" name="start_with_double" value="double_checkin"> Do you have to start the game with a double?
         </p>
         <p>
+            <label>How many Legs?</label><br>
+            <input type="range" name="legs" min="1" max="9" step="2">
+        </p>
+        <p>
+            <label>How many Sets?</label><br>
+            <input type="range" name="sets" min="3" max="13" step="2">
+        </p>
+        <p>
             <input type="checkbox" name="end_with_double" value="double_checkout" checked> Do you have to end the game with a double?
         </p>
     {% endif %}
