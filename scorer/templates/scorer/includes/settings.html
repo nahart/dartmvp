@@ -21,23 +21,56 @@
             <input type="radio" name="enter_1_or_3_darts" value="1_dart"> Sum of Each Throw <br>
             <input type="radio" name="enter_1_or_3_darts" value="3_darts"> Enter Each Throw
         </p>
-        <p>
+
+        <!--<p>
             <input type="checkbox" name="start_with_double" value="double_checkin"> Do you have to start the game with a double?
-        </p>
-        <p>
-            <label>How many Legs?</label><br>
-            <input type="range" name="legs" min="1" max="9" step="2">
-        </p>
-        <p>
-            <label>How many Sets?</label><br>
-            <input type="range" name="sets" min="3" max="13" step="2">
-        </p>
-        <p>
+        </p>-->
+        <div class="custom-control custom-checkbox my-1 mr-sm-2">
+            <input type="checkbox" class="custom-control-input" id="start_with_double">
+            <label class="custom-control-label" for="start_with_double">Double required to start game?</label>
+        </div>
+        <br>
+    
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupLegs">How many Legs?</label>
+        </div>
+        <select class="custom-select" id="inputGroupLegs">
+            <option value="1">One</option>
+            <option value="3" selected>Three</option>
+            <option value="5">Five</option>
+            <option value="7">Seven</option>
+            <option value="9">Nine</option>
+        </select>
+        </div>
+
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSets">How many Sets?</label>
+        </div>
+        <select class="custom-select" id="inputGroupSets">
+            <option value="3">Three</option>
+            <option value="5" selected>Five</option>
+            <option value="7">Seven</option>
+            <option value="9">Nine</option>
+            <option value="11">Eleven</option>
+            <option value="13">Thirteen</option>
+        </select>
+        </div>
+
+        <!--<p>
             <input type="checkbox" name="end_with_double" value="double_checkout" checked> Do you have to end the game with a double?
-        </p>
+        </p>-->
+        <div class="custom-control custom-checkbox my-1 mr-sm-2">
+            <input type="checkbox" class="custom-control-input" id="end_with_double" checked>
+            <label class="custom-control-label" for="end_with_double">Double required to end game?</label>
+        </div>
+
     {% endif %}
 
-    <input type="submit" value="Let's Play">
+    <br>
+    <!--<input type="submit" value="Let's Play">-->
+    <button type="submit" class="btn btn-success">Let's Play</button>
 </form>
 
 {% endblock %}
