@@ -61,3 +61,8 @@ class GameView(View):
 
     def post(self, request):
         pass
+
+class LandingPageView(View):
+
+    def get(self, request):
+        return render(request, 'scorer/landingpage.html')

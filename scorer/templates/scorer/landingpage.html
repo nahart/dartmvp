@@ -1,0 +1,20 @@
+{% extends "scorer/header.html" %}
+
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Throw Like the Pros</h1>
+    <h2 class="lead">Use Noah's dart scorer to keep track of your progress and play with friends.</h2>
+  </div>
+</div>
+{% load staticfiles %}
+
+<img src="{% static 'scorer/img/mvg_darts.jpg' %}" class="img-fluid" alt="Responsive image">
+<div><p></p></div>
+
+<a href="http://127.0.0.1:8000/scorer/start_game' type="button" class="btn btn-primary btn-lg btn-block">Try Noah's Dart Scorer free now</a>
+<button type="button" class="btn btn-secondary btn-lg btn-block">Sign up to get notified when more features are released</button>
+
+{% endblock %}
+
