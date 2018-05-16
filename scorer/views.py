@@ -57,7 +57,7 @@ class SettingsView(View):
 class GameView(View):
 
     def get(self, request):
-        pass
+        return render(request, 'scorer/game.html')
 
     def post(self, request):
         pass
