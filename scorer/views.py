@@ -53,8 +53,10 @@ class SettingsView(View):
             match.players.add(player)
         match.save()
         player.save()
+
         print request.POST.keys()
         print request.POST.values()
+
         return redirect('game')
 
 class GameView(View):
