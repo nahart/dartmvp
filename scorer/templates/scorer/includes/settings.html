@@ -1,16 +1,17 @@
 {% block content %}
-<p>This will be the future settings panel.</p>
+
+<br>
 
 <form action="{% url 'start_game' %}" method="post">
     {% csrf_token %}
     <p>
-        <label>Player 1</label>
+        <label><b>Player 1</b></label>
         <input type="text" name="player_1_first_name" placeholder="First Name" required value="Noah">
         <input type="text" name="player_1_last_name" placeholder="Last Name" required value="Hart">
     </p>
 
     <p>
-        <label>Player 2</label>
+        <label><b>Player 2</b></label>
         <input type="text" name="player_2_first_name" placeholder="First Name" required value="Kelsey">
         <input type="text" name="player_2_last_name" placeholder="Last Name" required value="Greathouse">
     </p>
