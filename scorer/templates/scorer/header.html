@@ -42,11 +42,12 @@
 		  <br>
 		   <!-- Great, til you resize. -->
 			<!--<div class="well bs-sidebar affix" id="sidebar" style="background-color:#fff">-->
-			<div class="well bs-sidebar" id="sidebar" style="background-color:#fff">
+			<div class="nav flex-column nav-pills" id="sidebar" style="background-color:#fff" aria-orientation="vertical">
 			  <ul class="nav nav-pills nav-stacked">
-				<li><a href='/'>Home</a></li>
-				<li><a href='http://3dartstoplay.com/'>Blog</a></li>
-				<li><a href='#'>Contact</a></li>
+				  <a class="nav-link" href='/'>Home</a>
+				  <a class="nav-link" href='http://3dartstoplay.com/'>Blog</a>
+                  <a class="nav-link" data-toggle="modal" href='#'>Stats</a>
+                  <a class="nav-link" href='#'>Contact</a>
 			  </ul>
 			</div> <!--well bs-sidebar affix-->
 		  </div> <!--col-sm-2-->
@@ -64,7 +65,7 @@
 		<div class="container-fluid" style='margin-left:15px'>
 			<p><a href="#" target="blank">Contact</a> | <a href="https://www.facebook.com/3dartstoplay" target="blank">Facebook</a> | <a href="https://twitter.com/3dartstoplay" target="blank">Twitter</a> | <a href="#" target="blank">Google+</a></p>
 		</div>
-	</footer>
+    </footer>
 
 </body>
 

@@ -70,4 +70,8 @@ $(document).ready(function() {
 
     check_if_valid_score();
     console.log($throwFocus.val())
+
+    $('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+})
 });
