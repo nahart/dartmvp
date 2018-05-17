@@ -72,6 +72,6 @@ $(document).ready(function() {
     console.log($throwFocus.val())
 
     $('#myModal').on('shown.bs.modal', function () {
-    $('#myInput').trigger('focus')
-})
+        $('#myInput').trigger('focus')
+    })
 });
