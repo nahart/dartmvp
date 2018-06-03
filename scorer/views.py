@@ -81,9 +81,28 @@ class SettingsView(View):
         # Redirect to Game with data
         return redirect('game')
 
+class PlayerCurrentStatus(object):
+    def __init__(self, match, player):
+        self.id = id
+        self.name = name
+        self.sequence = PlayerOrder.objects.get(match=match, player=player).sequence
+        self.overall_score = None
+        self.my_turn = False
+        self.overall_score = sum(PlayerTurn.objects.filter(player=player,
+                                                           match_turn__match_id=match.id).values_list('score',
+                                                                                                      flat=True))
+
 class GameView(View):
 
-    def get(self, request):
+    def get(self, request, match_id):
+        # Deliver PLayer Scores for both Players
+
+        # Deliver Match Turn & Player Turn
+        match_turns = MatchTurn.objects.filter(id=match_id).order_by('sequence')
+        player_turns = []
+        for match_turn in match_turns:
+            player_turns.append(match_turn.player_turns)
+
         return render(request, 'scorer/game.html')
 
     def post(self, request):
