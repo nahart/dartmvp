@@ -3,22 +3,27 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-# Create your models here.
+
 class Player(models.Model):
     name = models.CharField(max_length=30)
     email = models.CharField(max_length=50)
+
 
 class Match(models.Model):
     players = models.ManyToManyField(Player)
     starting_score = models.PositiveIntegerField()
 
+
+class MatchPlayerOrder(models.Model):
+    match = models.ForeignKey(Match, on_delete=models.CASCADE)
+    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    sequence = models.PositiveIntegerField()
+
+
 class MatchTurn(models.Model):
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
-    sequence = models.PositiveIntegerField(default=0)
+    sequence = models.PositiveIntegerField()
 
-    @property
-    def player_turns(self):
-        return PlayerTurn.models.filter(match_turn=self)
 
 class PlayerTurn(models.Model):
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
