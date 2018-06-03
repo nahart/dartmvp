@@ -10,9 +10,11 @@ class Player(models.Model):
 
 class Match(models.Model):
     players = models.ManyToManyField(Player)
+    starting_score = models.PositiveIntegerField()
 
 class MatchTurn(models.Model):
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
+    sequence = models.PositiveIntegerField(default=0)
 
     @property
     def player_turns(self):
@@ -21,6 +23,4 @@ class MatchTurn(models.Model):
 class PlayerTurn(models.Model):
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     match_turn = models.ForeignKey(MatchTurn, on_delete=models.CASCADE)
-
-class Score(models.Model):
-    player_turn = models.ForeignKey(PlayerTurn, on_delete=models.CASCADE)
+    score = models.PositiveIntegerField()
