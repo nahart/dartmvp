@@ -22,7 +22,7 @@ class DartView(View):
         return render(request, 'scorer/home.html', template_vars)
 
     def post(self, request):
-        print request.POST.keys()
+        print(request.POST.keys())
         return redirect('scorer')
 
 
@@ -54,8 +54,8 @@ class SettingsView(View):
         match.save()
         player.save()
 
-        print request.POST.keys()
-        print request.POST.values()
+        print(request.POST.keys())
+        print(request.POST.values())
 
         return redirect('game')
 

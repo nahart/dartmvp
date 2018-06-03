@@ -12,15 +12,15 @@ class Match(models.Model):
     players = models.ManyToManyField(Player)
 
 class MatchTurn(models.Model):
-    match = models.ForeignKey(Match)
+    match = models.ForeignKey(Match, on_delete=models.CASCADE)
 
     @property
     def player_turns(self):
         return PlayerTurn.models.filter(match_turn=self)
 
 class PlayerTurn(models.Model):
-    player = models.ForeignKey(Player)
-    match_turn = models.ForeignKey(MatchTurn)
+    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    match_turn = models.ForeignKey(MatchTurn, on_delete=models.CASCADE)
 
 class Score(models.Model):
-    player_turn = models.ForeignKey(PlayerTurn)
+    player_turn = models.ForeignKey(PlayerTurn, on_delete=models.CASCADE)
