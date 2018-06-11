@@ -112,12 +112,13 @@ class GameView(View):
         players_statuses = []
         player_turn_determined = False
         for player_turn in last_player_turns_sequence_ordered:
-            player_status = PlayerStatus(match=self.match, player_turn=player_turn)
 
             # determine whether or not if it is this player's turn
             if (not player_turn_determined) and (player_turn.score == -1):
-                player_status.my_turn = True
+                player_status = PlayerStatus(match=self.match, player_turn=player_turn, my_turn=True)
                 player_turn_determined = True
+            else:
+                player_status = PlayerStatus(match=self.match, player_turn=player_turn)
 
             players_statuses.append(player_status)
 
@@ -150,7 +151,13 @@ class GameView(View):
 
         return render(request, 'scorer/game.html', template_vars)
 
-    def post(self, request):
+    def post(self, request, match_id, player_id):
+        # Parse out info in POST Keys request.POST.keys()
+        # example: player_1_score, player_2_score
+        # scores = something
+
+        # update the specific player turn's score
+        # redirect back to the get!
         pass
 
 class LandingPageView(View):

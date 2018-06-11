@@ -2,11 +2,11 @@ from .models import PlayerTurn, MatchPlayerOrder
 
 
 class PlayerStatus(object):
-    def __init__(self, match, player_turn):
+    def __init__(self, match, player_turn, my_turn=False):
         self.id = player_turn.player.id
         self.name = player_turn.player.name
         self.sequence = player_turn.sequence
-        self.my_turn = False
+        self.my_turn = my_turn
 
         # Determine the overall score for this player
         turns_scores = PlayerTurn.objects.filter(player=player_turn.player, match_turn__match_id=match.id).values_list('score', flat=True)
@@ -21,3 +21,9 @@ class PlayerStatus(object):
             points_earned += turn_score
 
         self.overall_score = match.starting_score - points_earned
+
+    def __repr__(self):
+        return "PlayerStatus: {} {}".format(self.name, self.sequence)
+
+    def __str__(self):
+        return "PlayerStatus: {} {}".format(self.name, self.sequence)

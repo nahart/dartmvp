@@ -1,9 +1,18 @@
 {% extends "scorer/header.html" %}
-<h2>{{ players }}</h2>
-<h2>{{ player }}</h2>
-<h2>{{ match }}</h2>
-<h2>{{ player_1_first_name }}</h2>
+
+{% block content %}
+    <h2>{{ match_turn_number }}</h2>
+    {% for player_status in players_statuses %}
+      <p>{{ player_status.name }}{% if player_status.my_turn %}*{% endif%}</p>
+      <p>{{ player_status.score }}</p>
+    {% endfor %}
+    <form action="POST" url="{% url game 1 %} ---> game/1/">
+        <input type="text" name="player_{{ player_status.id }}_score">
+
+    </form>
+{% endblock %}
+
 <!--
 I want to create a 301 game here.
-the url should looko something like this
+the url should looks something like this
 http://127.0.0.1:8000/scorer/game/{game_id} -->

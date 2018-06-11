@@ -21,7 +21,7 @@ class MatchPlayerOrder(models.Model):
 
 
 class MatchTurn(models.Model):
-    match = models.ForeignKey(Match, on_delete=models.CASCADE)
+    match = models.ForeignKey(Match, on_delete=models.CASCADE) #, related_name='match_turns')
     sequence = models.PositiveIntegerField()
 
 
