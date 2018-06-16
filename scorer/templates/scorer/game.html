@@ -6,7 +6,7 @@
       <p>{{ player_status.name }}{% if player_status.my_turn %}*{% endif%}</p>
       <p>{{ player_status.score }}</p>
     {% endfor %}
-    <form action="POST" url="{% url game 1 %} ---> game/1/">
+    <form action="POST" url="{% url 'game' 1 %}">
         <input type="text" name="player_{{ player_status.id }}_score">
 
     </form>
