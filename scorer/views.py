@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect
 from django.views.generic import View
-
+from django.urls import reverse
 from .helpers import PlayerStatus
 from .models import Player, Match, MatchTurn, PlayerTurn, MatchPlayerOrder
 
@@ -80,12 +80,10 @@ class SettingsView(View):
                 score=-1,  # initialize their score to -1 (-1 means the turn has NOT been taken!)
             )
 
-        # Remove Later - Info for Debugging
-        print(request.POST.keys())
-        print(request.POST.values())
-
         # Redirect to Game with data
-        return redirect('game')
+        # Set a session variable with match_id
+        request.session['match_id'] = match.id
+        return redirect('game_no_match_id')
 
 
 class GameView(View):
@@ -115,16 +113,25 @@ class GameView(View):
 
             # determine whether or not if it is this player's turn
             if (not player_turn_determined) and (player_turn.score == -1):
-                player_status = PlayerStatus(match=self.match, player_turn=player_turn, my_turn=True)
+                player_status = PlayerStatus(match=self.match,
+                                             player_turn=player_turn,
+                                             my_turn=True,
+                                             match_turn_id=last_match_turn.id)
                 player_turn_determined = True
             else:
-                player_status = PlayerStatus(match=self.match, player_turn=player_turn)
+                player_status = PlayerStatus(match=self.match,
+                                             player_turn=player_turn,
+                                             match_turn_id=last_match_turn.id)
 
             players_statuses.append(player_status)
 
         return players_statuses
 
-    def get(self, request, match_id):
+    def get(self, request, match_id=None):
+        #Get match_id from session variables if not provided
+        if not match_id:
+            match_id = request.session.get('match_id')
+
         try:
             self.match = Match.objects.get(id=match_id)
         except Match.DoesNotExist:
@@ -147,18 +154,51 @@ class GameView(View):
         template_vars = {
             'match_turn_number': match_turn_number,
             'players_statuses': players_statuses,
+            'post_url': reverse('game', kwargs={'match_id': match_id})
         }
 
         return render(request, 'scorer/game.html', template_vars)
 
-    def post(self, request, match_id, player_id):
+    def post(self, request, match_id):
         # Parse out info in POST Keys request.POST.keys()
-        # example: player_1_score, player_2_score
-        # scores = something
+        # Remove Later - Info for Debugging
+
+        player_key = [key for key in request.POST.keys() if key.startswith('player_')][0]
+        player_id = player_key.split('_')[1]
+        player_score = request.POST[player_key]
+        match_turn_id = request.POST['match_turn_id']
 
         # update the specific player turn's score
-        # redirect back to the get!
-        pass
+        player_turns = PlayerTurn.objects.filter(match_turn_id=match_turn_id)
+        player_turn = player_turns.get(player_id=player_id)
+        player_turn.score = player_score
+        player_turn.save(update_fields=['score'])
+
+        player_scores = player_turns.values_list('score', flat=True)
+
+        if -1 not in player_scores:
+            #If the match_turn is complete, then create a new match_turn
+            last_match_turn = MatchTurn.objects.filter(match_id=match_id).order_by('sequence').last()
+            next_sequence = last_match_turn.sequence + 1
+
+            # Create a new match turn
+            match_turn = MatchTurn.objects.create(
+                match_id=match_id,
+                sequence=next_sequence
+            )
+
+            players = Match.objects.get(id=match_id).players.all()
+            # Create player turn for every player
+            for player in players:
+                PlayerTurn.objects.create(
+                    player=player,
+                    match_turn=match_turn,
+                    score=-1,  # initialize their score to -1 (-1 means the turn has NOT been taken!)
+                )
+
+        #Set a session variable with match_id
+        request.session['match_id'] = match_id
+        return redirect('game_no_match_id')
 
 class LandingPageView(View):
 

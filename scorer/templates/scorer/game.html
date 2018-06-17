@@ -4,12 +4,18 @@
     <h2>{{ match_turn_number }}</h2>
     {% for player_status in players_statuses %}
       <p>{{ player_status.name }}{% if player_status.my_turn %}*{% endif%}</p>
-      <p>{{ player_status.score }}</p>
-    {% endfor %}
-    <form action="POST" url="{% url 'game' 1 %}">
-        <input type="text" name="player_{{ player_status.id }}_score">
+      <p>{{ player_status.overall_score }}</p>
 
-    </form>
+    {% if player_status.my_turn %}
+        <form action="{{ post_url }}" method="post">
+            {% csrf_token %}
+            <input type="text" name="player_{{ player_status.id }}_score">
+            <input type="hidden" name="match_turn_id" value="{{ player_status.match_turn_id }}">
+            <input type="submit" value="Enter Score">
+        </form>
+    {% endif %}
+    {% endfor %}
+
 {% endblock %}
 
 <!--
