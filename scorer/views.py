@@ -161,8 +161,6 @@ class GameView(View):
 
     def post(self, request, match_id):
         # Parse out info in POST Keys request.POST.keys()
-        # Remove Later - Info for Debugging
-
         player_key = [key for key in request.POST.keys() if key.startswith('player_')][0]
         player_id = player_key.split('_')[1]
         player_score = request.POST[player_key]
