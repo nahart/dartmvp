@@ -22,7 +22,7 @@
                 {% if player_status.my_turn %}
                     <form action="{{ post_url }}" method="post" class="form-inline justify-content-center">
                         {% csrf_token %}
-                        <input type="text" class="form-control mb-1" name="player_{{ player_status.id }}_score">
+                        <input type="number" min=0 max=180 class="form-control mb-1" required placeholder="Score" name="player_{{ player_status.id }}_score">
                         <input type="hidden" name="match_turn_id" value="{{ player_status.match_turn_id }}">
                         <button type="submit" class="btn btn-primary mb-1">Enter Score</button>
                     </form>
