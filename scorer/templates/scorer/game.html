@@ -16,9 +16,9 @@
     <div class="container">
         <div class="row justify-content-md-center">
             {% for player_status in players_statuses %}
-            <div class="col col-lg-3 text-center">
-                <p>{{ player_status.name }}{% if player_status.my_turn %}*{% endif%}</p>
-                <p>{{ player_status.overall_score }}</p>
+            <div class="col col-lg-3 text-center bg-light border border-secondary rounded">
+                <p class="font-weight-bold">{% if player_status.my_turn %}<i class="fas fa-circle fa-xs text-success"></i> {% endif%}{{ player_status.name }}</p>
+                <h1 class="bg-danger rounded">{{ player_status.overall_score }}</h1>
                 {% if player_status.my_turn %}
                     <form action="{{ post_url }}" method="post" class="form-inline justify-content-center">
                         {% csrf_token %}
