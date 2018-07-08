@@ -1,6 +1,5 @@
 from .models import PlayerTurn, MatchPlayerOrder
 
-
 class PlayerStatus(object):
     def __init__(self, match, player_turn, my_turn=False, match_turn_id=None):
         self.id = player_turn.player.id
@@ -22,6 +21,12 @@ class PlayerStatus(object):
             points_earned += turn_score
 
         self.overall_score = match.starting_score - points_earned
+
+    @property
+    def winner(self):
+        if self.overall_score == 0:
+            return True
+        return False
 
     def __repr__(self):
         return "PlayerStatus: {} {}".format(self.name, self.sequence)

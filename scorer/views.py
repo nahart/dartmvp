@@ -97,7 +97,7 @@ class GameView(View):
         last_match_turn = list(match_turns)[-1]
 
         # get all the player turns that belong to this match turn
-        player_turns = last_match_turn.playerturn_set.all()
+        player_turns = last_match_turn.player_turns.all()
 
         # add a 'sequence' attribute to each player_turn in player_turns
         for player_turn in player_turns:
@@ -143,7 +143,7 @@ class GameView(View):
         )
 
         # get all the match turns for this match
-        match_turns = self.match.matchturn_set.all().order_by('sequence')
+        match_turns = self.match.match_turns.all().order_by('sequence')
 
         # count the number of match turns (determines what match turn we are on)
         match_turn_number = match_turns.count()
@@ -162,15 +162,36 @@ class GameView(View):
     def post(self, request, match_id):
         # Parse out info in POST Keys request.POST.keys()
         player_key = [key for key in request.POST.keys() if key.startswith('player_')][0]
-        player_id = player_key.split('_')[1]
-        player_score = request.POST[player_key]
+        player_id = int(player_key.split('_')[1])
+        player_score = int(request.POST[player_key])
         match_turn_id = request.POST['match_turn_id']
 
         # update the specific player turn's score
+        self.match = MatchTurn.objects.get(id=match_turn_id).match
         player_turns = PlayerTurn.objects.filter(match_turn_id=match_turn_id)
         player_turn = player_turns.get(player_id=player_id)
-        player_turn.score = player_score
-        player_turn.save(update_fields=['score'])
+
+        # get all the match turns for this match
+        match_turns = self.match.match_turns.all().order_by('sequence')
+
+        # create an index player_id -> sequence
+        self.player_id_to_sequence = dict(
+            MatchPlayerOrder.objects.filter(match=self.match).values_list('player_id', 'sequence')
+        )
+
+        players_statuses = self._get_player_statuses(match_turns)
+        current_turn_player_status_list = [player_status for player_status in players_statuses if player_status.id == player_id]
+        if current_turn_player_status_list:
+            current_turn_player_status = current_turn_player_status_list[0]
+        else:
+            current_turn_player_status = None
+
+        if current_turn_player_status and ((current_turn_player_status.overall_score - player_score) < 0):
+            player_turn.score = 0
+            player_turn.save(update_fields=['score'])
+        else:
+            player_turn.score = player_score
+            player_turn.save(update_fields=['score'])
 
         player_scores = player_turns.values_list('score', flat=True)
 
