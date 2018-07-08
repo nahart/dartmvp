@@ -18,12 +18,14 @@
 
 
 
-    {% if game_301 %}
-        <!--<p>
-            <label>Do you want to enter each dart or the sum of each?</label><br>
-            <input type="radio" name="enter_1_or_3_darts" value="1_dart"> Sum of Each Throw <br>
-            <input type="radio" name="enter_1_or_3_darts" value="3_darts"> Enter Each Throw
-        </p>-->
+    {% if game_X01 %}
+
+        <div class="input-group mb-3">
+            <label><b>Starting Score? </b></label>
+            <input type="number" name="x01" placeholder="301/501/701" min="301" step="200" max="701" required>
+        </div>
+        <br>
+
         <label>Do you want to enter the sum of all throws in a round or each throw individually?</label>
 
         <div class="btn-group btn-group-toggle throw-entry-mode" data-toggle="buttons">

@@ -50,7 +50,7 @@ class SettingsView(View):
 
         # Create a Match
         match = Match.objects.create(
-            starting_score=301
+            starting_score=int(request.POST.get("x01"))
         )
 
         # Add players to match and create the MatchPlayerOrder objects
