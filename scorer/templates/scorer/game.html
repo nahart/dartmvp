@@ -34,6 +34,22 @@
         </div>
     </div>
 
+    <div class="container">
+        <div class="row justify-content-md-center">
+            {% for player_status in players_statuses %}
+            {% if player_status.winner %}
+                <button type="button" href="127.0.0.1:8000/scorer/start_game" class="btn btn-info mx-4 mt-2">Play Again?</button>
+                <button type="button" class="btn btn-info mx-4 mt-2">Save Game</button>
+                <button type="button" class="btn btn-info mx-4 mt-2">Share Results</button>
+                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button mx-4 mt-2" data-size="large"
+                    data-text="I won a game of darts at DartMVP.com!" data-url="http://www.dartsmvp.com"
+                    data-hashtags="darts" data-show-count="false">Tweet the results</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
 {% endblock %}
 
 <!--
