@@ -20,7 +20,7 @@
                 <p class="font-weight-bold">{% if player_status.my_turn %}<i class="fas fa-circle fa-xs text-success"></i> {% endif%}{{ player_status.name }}</p>
                 <h1 class="bg-danger rounded">{{ player_status.overall_score }}</h1>
                 {% if player_status.winner %}
-                    WINNER
+                    <b>WINNER</b>
                 {% elif player_status.my_turn %}
                     <form action="{{ post_url }}" method="post" class="form-inline justify-content-center">
                         {% csrf_token %}
@@ -38,7 +38,7 @@
         <div class="row justify-content-md-center">
             {% for player_status in players_statuses %}
             {% if player_status.winner %}
-                <button type="button" href="127.0.0.1:8000/scorer/start_game" class="btn btn-info mx-4 mt-2">Play Again?</button>
+                <button type="button" class="btn btn-info mx-4 mt-2">Play Again?</button>
                 <button type="button" class="btn btn-info mx-4 mt-2">Save Game</button>
                 <button type="button" class="btn btn-info mx-4 mt-2">Share Results</button>
                 <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button mx-4 mt-2" data-size="large"

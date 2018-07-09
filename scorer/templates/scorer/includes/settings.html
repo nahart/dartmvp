@@ -5,28 +5,58 @@
 <form action="{% url 'start_game' %}" method="post">
     {% csrf_token %}
     <p>
-        <label><b>Player 1</b></label>
-        <input type="text" name="player_1_first_name" placeholder="First Name" required value="Noah">
-        <input type="text" name="player_1_last_name" placeholder="Last Name" required value="Hart">
+        <div class="form-row">
+            <label class="col-sm-1">
+                <b>Player 1</b>
+            </label>
+            <div class="col">
+                <input type="text" class="form-control" name="player_1_first_name" placeholder="First Name" required value="Noah">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" name="player_1_last_name" placeholder="Last Name" required value="Hart">
+            </div>
+        </div>
     </p>
 
     <p>
-        <label><b>Player 2</b></label>
-        <input type="text" name="player_2_first_name" placeholder="First Name" required value="Kelsey">
-        <input type="text" name="player_2_last_name" placeholder="Last Name" required value="Greathouse">
+        <div class="form-row">
+            <label class="col-sm-1">
+                <b>Player 2</b>
+            </label>
+            <div class="col">
+                <input type="text" class="form-control" name="player_2_first_name" placeholder="First Name" required value="Kelsey">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" name="player_2_last_name" placeholder="Last Name" required value="Greathouse">
+            </div>
+        </div>
     </p>
 
-
+    <p>
+        <div class="form-row">
+            <label class="col-sm-1">
+                <b>Player 3</b>
+            </label>
+            <div class="col">
+                <input type="text" class="form-control" name="player_3_first_name" placeholder="First Name" value="Kermit">
+                    </div>
+                    <div class="col">
+                <input type="text" class="form-control" name="player_3_last_name" placeholder="Last Name" value="Jean">
+            </div>
+        </div>
+    </p>
 
     {% if game_X01 %}
 
-        <div class="input-group mb-3">
-            <label><b>Starting Score? </b></label>
-            <input type="number" name="x01" placeholder="301/501/701" min="301" step="200" max="701" required>
+        <div class="form-row">
+            <label class="col-sm-2">
+                <b>Starting Score? </b>
+            </label>
+            <input type="number" class="form-control" name="x01" placeholder="301/501/701" min="301" step="200" max="701" required>
         </div>
         <br>
 
-        <label>Do you want to enter the sum of all throws in a round or each throw individually?</label>
+        <!--<label>Do you want to enter the sum of all throws in a round or each throw individually?</label>
 
         <div class="btn-group btn-group-toggle throw-entry-mode" data-toggle="buttons">
             <label class="btn btn-secondary active">
@@ -37,9 +67,7 @@
             </label>
         </div>
         <div><br></div>
-        <!--<p>
-            <input type="checkbox" name="start_with_double" value="double_checkin"> Do you have to start the game with a double?
-        </p>-->
+
         <div class="custom-control custom-checkbox my-1 mr-sm-2">
             <input type="checkbox" class="custom-control-input" id="start_with_double">
             <label class="custom-control-label" for="start_with_double">Double required to start game?</label>
@@ -47,45 +75,41 @@
         <br>
 
         <div class="input-group mb-3">
-        <div class="input-group-prepend">
-        <label class="input-group-text" for="inputGroupSets">How many Sets?</label>
-        </div>
-        <select class="custom-select" id="inputGroupSets">
-            <option value="1" selected>One</option>
-            <option value="3">Three</option>
-            <option value="5">Five</option>
-            <option value="7">Seven</option>
-            <option value="9">Nine</option>
-            <option value="11">Eleven</option>
-            <option value="13">Thirteen</option>
-        </select>
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSets">How many Sets?</label>
+            </div>
+            <select class="custom-select" id="inputGroupSets">
+                <option value="1" selected>One</option>
+                <option value="3">Three</option>
+                <option value="5">Five</option>
+                <option value="7">Seven</option>
+                <option value="9">Nine</option>
+                <option value="11">Eleven</option>
+                <option value="13">Thirteen</option>
+            </select>
         </div>
 
         <div class="input-group mb-3">
-        <div class="input-group-prepend">
-        <label class="input-group-text" for="inputGroupLegs">How many Legs?</label>
-        </div>
-        <select class="custom-select" id="inputGroupLegs">
-            <option value="1">One</option>
-            <option value="3">Three</option>
-            <option value="5" selected>Five</option>
-            <option value="7">Seven</option>
-            <option value="9">Nine</option>
-        </select>
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupLegs">How many Legs?</label>
+            </div>
+            <select class="custom-select" id="inputGroupLegs">
+                <option value="1">One</option>
+                <option value="3">Three</option>
+                <option value="5" selected>Five</option>
+                <option value="7">Seven</option>
+                <option value="9">Nine</option>
+            </select>
         </div>
 
-        <!--<p>
-            <input type="checkbox" name="end_with_double" value="double_checkout" checked> Do you have to end the game with a double?
-        </p>-->
         <div class="custom-control custom-checkbox my-1 mr-sm-2">
             <input type="checkbox" class="custom-control-input" id="end_with_double" checked>
             <label class="custom-control-label" for="end_with_double">Double required to end game?</label>
-        </div>
+        </div>-->
 
     {% endif %}
 
     <br>
-    <!--<input type="submit" value="Let's Play">-->
     <button type="submit" class="btn btn-success">Let's Play</button>
 </form>
 
