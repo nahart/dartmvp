@@ -14,7 +14,7 @@ $(document).ready(function() {
 //    $("#throw3").val('0');
 
     //Show Player Score
-    document.getElementById('score').innerHTML = playerScore;
+/*    document.getElementById('score').innerHTML = playerScore;*/
 
 // This waits fot a number to be clicked and adds it to the input
     $(".num_input").on("click", function() {
@@ -56,6 +56,46 @@ $(document).ready(function() {
           $('.alert').show('fade')
       }
     }
+
+    $('#addplayer').on('click', function(){
+        console.log('add player');
+        var numVisiblePlayers = $('.player:visible').length;
+        console.log(numVisiblePlayers);
+
+        if (numVisiblePlayers == 1){
+            $('#player2').show();
+            $('#player-2-first-name').prop('required', true);
+            $('#player-2-last-name').prop('required', true);
+        } else if (numVisiblePlayers == 2){
+            $('#player3').show();
+            $('#player-3-first-name').prop('required', true);
+            $('#player-3-last-name').prop('required', true);
+        } else if (numVisiblePlayers == 3){
+            $('#player4').show();
+            $('#player-4-first-name').prop('required', true);
+            $('#player-4-last-name').prop('required', true);
+        }
+    });
+
+    $('#removeplayer').on('click', function(){
+        console.log('remove player');
+        var numVisiblePlayers = $('.player:visible').length;
+        console.log(numVisiblePlayers);
+
+        if (numVisiblePlayers == 4){
+            $('#player4').hide();
+            $('#player-4-first-name').prop('required', false);
+            $('#player-4-last-name').prop('required', false);
+        } else if (numVisiblePlayers == 3){
+            $('#player3').hide();
+            $('#player-3-first-name').prop('required', false);
+            $('#player-3-last-name').prop('required', false);
+        } else if (numVisiblePlayers == 2){
+            $('#player2').hide();
+            $('#player-2-first-name').prop('required', false);
+            $('#player-2-last-name').prop('required', false);
+        }
+    });
 
     $('.alert').alert()
 

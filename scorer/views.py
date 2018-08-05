@@ -26,10 +26,19 @@ class DartView(View):
 
 class SettingsView(View):
 
-    def get(self, request):
-        return render(request, 'scorer/start_game.html')
+    def get(self, request, match_id=None):
+        if not match_id:
+            return render(request, 'scorer/start_game.html')
+        
+        self.request = request
+        players = []
+        # get all the polayers from game match
+        self.start_game(players, '301')
 
     def post(self, request):
+        self.request = request
+
+        players = []
 
         # Create Players
         player_numbers = set()
@@ -38,7 +47,6 @@ class SettingsView(View):
                 player_number = player_key.split('_')[1]
                 player_numbers.add(player_number)
 
-        players = []
         for player_number in sorted(player_numbers):
             player_first_name = request.POST.get("player_{}_first_name".format(player_number))
             player_last_name = request.POST.get("player_{}_last_name".format(player_number))
@@ -47,10 +55,14 @@ class SettingsView(View):
                 email=''
             )
             players.append(player)
+        game_type = self.request.POST.get("x01")
+        self.start_game(players, game_type)
+
+    def start_game(self, players, game_type):
 
         # Create a Match
         match = Match.objects.create(
-            starting_score=int(request.POST.get("x01"))
+            starting_score=int(game_type)
         )
 
         # Add players to match and create the MatchPlayerOrder objects
@@ -82,7 +94,7 @@ class SettingsView(View):
 
         # Redirect to Game with data
         # Set a session variable with match_id
-        request.session['match_id'] = match.id
+        self.request.session['match_id'] = match.id
         return redirect('game_no_match_id')
 
 

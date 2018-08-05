@@ -4,47 +4,61 @@
 
 <form action="{% url 'start_game' %}" method="post">
     {% csrf_token %}
-    <p>
-        <div class="form-row">
-            <label class="col-sm-1">
-                <b>Player 1</b>
-            </label>
-            <div class="col">
-                <input type="text" class="form-control" name="player_1_first_name" placeholder="First Name" required value="Noah">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" name="player_1_last_name" placeholder="Last Name" required value="Hart">
-            </div>
+    <div class="form-row player" id="player1">
+        <label class="col-sm-1">
+            <b>Player 1</b>
+        </label>
+        <div class="col">
+            <input type="text" class="form-control" id="player-1-first-name" name="player_1_first_name" placeholder="First Name" required value="Noah">
         </div>
-    </p>
+        <div class="col">
+            <input type="text" class="form-control" id="player-1-last-name" name="player_1_last_name" placeholder="Last Name" required value="Hart">
+        </div>
+    </div>
 
-    <p>
-        <div class="form-row">
-            <label class="col-sm-1">
-                <b>Player 2</b>
-            </label>
-            <div class="col">
-                <input type="text" class="form-control" name="player_2_first_name" placeholder="First Name" required value="Kelsey">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" name="player_2_last_name" placeholder="Last Name" required value="Greathouse">
-            </div>
+    <div class="form-row player" id="player2">
+        <label class="col-sm-1">
+            <b>Player 2</b>
+        </label>
+        <div class="col">
+            <input type="text" class="form-control" id="player-2-first-name" name="player_2_first_name" placeholder="First Name" required value="Kelsey">
         </div>
-    </p>
+        <div class="col">
+            <input type="text" class="form-control" id="player-2-last-name" name="player_2_last_name" placeholder="Last Name" required value="Greathouse">
+        </div>
+    </div>
 
-    <p>
-        <div class="form-row">
-            <label class="col-sm-1">
-                <b>Player 3</b>
-            </label>
-            <div class="col">
-                <input type="text" class="form-control" name="player_3_first_name" placeholder="First Name" value="Kermit">
-                    </div>
-                    <div class="col">
-                <input type="text" class="form-control" name="player_3_last_name" placeholder="Last Name" value="Jean">
-            </div>
+    <div class="form-row player" id="player3" style="display: none;">
+        <label class="col-sm-1">
+            <b>Player 3</b>
+        </label>
+        <div class="col">
+            <input type="text" class="form-control" id="player-3-first-name" name="player_3_first_name" placeholder="First Name" value="Kermit">
         </div>
-    </p>
+        <div class="col">
+            <input type="text" class="form-control" id="player-3-last-name" name="player_3_last_name" placeholder="Last Name" value="Jean">
+        </div>
+    </div>
+
+    <div class="form-row player" id="player4" style="display: none;">
+        <label class="col-sm-1">
+            <b>Player 4</b>
+        </label>
+        <div class="col">
+            <input type="text" class="form-control" id="player-4-first-name" name="player_4_first_name" placeholder="First Name" value="Michael">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" id="player-4-last-name" name="player_4_last_name" placeholder="Last Name" value="Jackson">
+        </div>
+    </div>
+
+    <div class="col col-sm-1">
+        <input type="button" value="add player" id="addplayer">
+    </div>
+
+    <div class="col col-sm-1">
+        <input type="button" value="remove player" id="removeplayer">
+    </div>
 
     {% if game_X01 %}
 
