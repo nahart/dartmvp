@@ -47,6 +47,12 @@ $(document).ready(function() {
       }
     }
 
+    $('#play-again').on('click', function() {
+      var playAgainURL = $(this).attr('href');
+      console.log($(this).attr('href'));
+      location.href = playAgainURL;
+    });
+
     function check_if_valid_score() {
       if ($throwFocus.val() <= 20) {
           console.log('valid');

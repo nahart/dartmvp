@@ -24,16 +24,24 @@ class DartView(View):
         return redirect('scorer')
 
 
-class SettingsView(View):
+class StartGameView(View):
 
     def get(self, request, match_id=None):
+        self.request = request
+
+        # if the match_id was not provided, simply render the start_game template
         if not match_id:
             return render(request, 'scorer/start_game.html')
-        
-        self.request = request
-        players = []
-        # get all the polayers from game match
-        self.start_game(players, '301')
+
+        match = Match.objects.get(id=match_id)
+        players = list(match.players.all())
+        starting_score = match.starting_score
+
+        # the match_id was provided; "play again" -> start a new game which is identical to the current current match
+
+        # get all the players from game match
+        self._start_game(players, starting_score)
+        return redirect('game_no_match_id')
 
     def post(self, request):
         self.request = request
@@ -55,14 +63,16 @@ class SettingsView(View):
                 email=''
             )
             players.append(player)
-        game_type = self.request.POST.get("x01")
-        self.start_game(players, game_type)
 
-    def start_game(self, players, game_type):
+        starting_score = self.request.POST.get("x01")
+        self._start_game(players, starting_score)
+        return redirect('game_no_match_id')
+
+    def _start_game(self, players, starting_score):
 
         # Create a Match
         match = Match.objects.create(
-            starting_score=int(game_type)
+            starting_score=int(starting_score)
         )
 
         # Add players to match and create the MatchPlayerOrder objects
@@ -95,7 +105,6 @@ class SettingsView(View):
         # Redirect to Game with data
         # Set a session variable with match_id
         self.request.session['match_id'] = match.id
-        return redirect('game_no_match_id')
 
 
 class GameView(View):
@@ -166,7 +175,8 @@ class GameView(View):
         template_vars = {
             'match_turn_number': match_turn_number,
             'players_statuses': players_statuses,
-            'post_url': reverse('game', kwargs={'match_id': match_id})
+            'post_url': reverse('game', kwargs={'match_id': match_id}),
+            'play_again_url': reverse('start_game', kwargs={'match_id': match_id}),
         }
 
         return render(request, 'scorer/game.html', template_vars)
