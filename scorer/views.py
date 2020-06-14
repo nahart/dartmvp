@@ -210,11 +210,9 @@ class GameView(View):
 
         if current_turn_player_status and ((current_turn_player_status.overall_score - player_score) < 0):
             player_turn.score = 0
-            player_turn.save(update_fields=['score'])
         else:
             player_turn.score = player_score
-            player_turn.save(update_fields=['score'])
-
+        player_turn.save(update_fields=['score'])
         player_scores = player_turns.values_list('score', flat=True)
 
         if -1 not in player_scores:

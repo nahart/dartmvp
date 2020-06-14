@@ -24,9 +24,7 @@ class PlayerStatus(object):
 
     @property
     def winner(self):
-        if self.overall_score == 0:
-            return True
-        return False
+        return self.overall_score == 0
 
     def __repr__(self):
         return "PlayerStatus: {} {}".format(self.name, self.sequence)
